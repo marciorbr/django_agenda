@@ -1,0 +1,4 @@
+.venv
+*pycache*
+*.sqlite3
+.DS_Store
