@@ -1,10 +1,14 @@
 from django.db import models
 from django.utils import timezone
 
-# Create your models here.
+
 class Categoria(models.Model):
     
     nome = models.CharField(max_length=255)
+    
+    # Adicionando o nome da categoria no Django admin
+    def __str__(self) -> str:
+        return self.nome
     
 class Contato(models.Model):
     
@@ -13,5 +17,9 @@ class Contato(models.Model):
     telefone = models.CharField(max_length=255)
     email = models.CharField(max_length=255, blank=True)
     data_criacao = models.DateTimeField(default=timezone.now)
-    descricao = models.TimeField(blank=True)
+    descricao = models.TextField(max_length=255, blank=True)
     categoria = models.ForeignKey(Categoria, on_delete=models.DO_NOTHING)
+    
+    # Adicionando o nome da categoria no Django admin
+    def __str__(self) -> str:
+        return self.nome
