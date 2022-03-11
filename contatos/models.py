@@ -19,6 +19,7 @@ class Contato(models.Model):
     data_criacao = models.DateTimeField(default=timezone.now)
     descricao = models.TextField(max_length=255, blank=True)
     categoria = models.ForeignKey(Categoria, on_delete=models.DO_NOTHING)
+    exibir = models.BooleanField(default=True)
     
     # Adicionando o nome da categoria no Django admin
     def __str__(self) -> str:
