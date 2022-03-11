@@ -5,7 +5,9 @@ from .models import Contato
 
 def index(request):
     
-    contatos = Contato.objects.order_by('nome')
+    contatos = Contato.objects.order_by('nome').filter(
+        exibir = True
+    )
     
     paginator = Paginator(contatos, 10) # Mostra 10 contatos por página
     page = request.GET.get('p')

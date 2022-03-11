@@ -15,16 +15,12 @@
       <tbody
 
         {% for contato in contatos %}
-          {% if contato.exibir %}
             <tr>
-              <td>
-                <a href="{% url 'ver_contato' contato.id %}">{{contato.nome}}</a>
-              </td>
+              <td><a href="{% url 'ver_contato' contato.id %}">{{contato.nome}}</a></td>
               <td>{{contato.sobrenome}}</td>
               <td>{{contato.telefone}}</td>
               <td>{{contato.categoria}}</td>
             </tr>
-          {% endif %}  
         {% endfor %}
       
       </tbody>
