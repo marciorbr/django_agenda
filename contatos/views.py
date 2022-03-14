@@ -2,7 +2,8 @@ from django.shortcuts import render, get_object_or_404
 from django.core.paginator import Paginator
 from django.http import Http404
 from .models import Contato
-from django.db.models import Q
+from django.db.models import Q, Value
+from django.db.models.functions import Concat
 
 from django.contrib import messages
 
@@ -35,9 +36,12 @@ def busca(request):
     
     termo = request.GET.get('termo')
     
-    contatos = Contato.objects.order_by('nome').filter(
-        Q(nome__icontains=termo) | Q(sobrenome__icontains=termo),
-        exibir = True
+    campos = Concat('nome', Value(' '), 'sobrenome')
+    
+    contatos = Contato.objects.annotate(
+        nome_completo=campos
+    ).filter(
+        Q(nome_completo__icontains=termo)
     )
     
     paginator = Paginator(contatos, 10) # Mostra 10 contatos por página
