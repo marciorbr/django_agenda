@@ -1,3 +1,4 @@
+from distutils.command.upload import upload
 from django.db import models
 from django.utils import timezone
 
@@ -20,6 +21,7 @@ class Contato(models.Model):
     descricao = models.TextField(max_length=255, blank=True)
     categoria = models.ForeignKey(Categoria, on_delete=models.DO_NOTHING)
     exibir = models.BooleanField(default=True)
+    foto = models.ImageField(blank=True, upload_to='fotos/%Y/%m/')
     
     # Adicionando o nome da categoria no Django admin
     def __str__(self) -> str:
