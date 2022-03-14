@@ -36,6 +36,9 @@ def busca(request):
     
     termo = request.GET.get('termo')
     
+    if termo is None or not termo:
+        raise Http404
+    
     campos = Concat('nome', Value(' '), 'sobrenome')
     
     contatos = Contato.objects.annotate(
